@@ -1,0 +1,23 @@
+{
+  "name": "lencioni",
+  "version": "0.1.0",
+  "description": "This is a simple website that allows you see your rating against the 5 Dysfunctions model described by Patrick Lencioni",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine",
+    "prettier": "prettier --write public/**/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armakuni/lencioni.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/armakuni/lencioni/issues"
+  },
+  "homepage": "https://github.com/armakuni/lencioni#readme",
+  "devDependencies": {
+    "jasmine": "^3.4.0"
+  }
+}
