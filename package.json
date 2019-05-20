@@ -19,5 +19,8 @@
   "homepage": "https://github.com/armakuni/lencioni#readme",
   "devDependencies": {
     "jasmine": "^3.4.0"
+  },
+  "dependencies": {
+    "seedrandom": "^3.0.1"
   }
 }
