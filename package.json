@@ -2,7 +2,7 @@
   "name": "lencioni",
   "version": "0.1.0",
   "description": "This is a simple website that allows you see your rating against the 5 Dysfunctions model described by Patrick Lencioni",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "jasmine",
     "prettier": "prettier --write public/**/*"
@@ -18,9 +18,15 @@
   },
   "homepage": "https://github.com/armakuni/lencioni#readme",
   "devDependencies": {
-    "jasmine": "^3.4.0"
+    "css-loader": "^2.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jasmine": "^3.4.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.32.0",
+    "webpack-cli": "^3.3.2"
   },
   "dependencies": {
+    "jquery": "^3.4.1",
     "seedrandom": "^3.0.1"
   }
 }

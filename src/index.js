@@ -1,3 +1,8 @@
+var seedrandom = require('seedrandom');
+var Survey = require('../assets/external/surveyjs/1.0.85/survey.jquery');
+var QuestionGroup = require('./questiongroup');
+import '../assets/external/surveyjs/1.0.85/survey.css';
+
 const QUESTIONS_PER_GROUP = 2;
 
 function buildQuestions(group, groupName) {
@@ -19,7 +24,7 @@ function buildQuestions(group, groupName) {
 }
 
 function shuffleArray(array) {
-  var randomGenerator = new Math.seedrandom(generateSeed());
+  var randomGenerator = new seedrandom(generateSeed());
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(randomGenerator() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
@@ -67,11 +72,11 @@ var data = {
 
 var elements = [];
 jQuery.each(data, function(index, group) {
-  groupQuestions = shuffleArray(group.questions).slice(0, QUESTIONS_PER_GROUP);
+  var groupQuestions = shuffleArray(group.questions).slice(0, QUESTIONS_PER_GROUP);
   elements = jQuery.merge(elements, buildQuestions(groupQuestions, index));
 });
 
-shuffledElements = shuffleArray(elements);
+var shuffledElements = shuffleArray(elements);
 
 var json = {
   completedHtml:
