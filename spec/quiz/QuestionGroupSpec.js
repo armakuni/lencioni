@@ -1,5 +1,5 @@
 describe("Question Group", function() {
-  var QuestionGroup = require('../../public/js/questiongroup');
+  var QuestionGroup = require('../../src/questiongroup');
 
   var group;
 
@@ -41,5 +41,32 @@ describe("Question Group", function() {
     });
   })
 
-  
+  describe("Limit", function() {
+    var limitedGroup
+    beforeEach(function() {
+      group = new QuestionGroup("my amazing group",["What is the time", "What is for dinner", "Where is my car"]);
+      limitedGroup = group.limit(1);
+    });
+
+    it("should be able to give me a limited set of questions", function() {
+      expect(limitedGroup).toEqual(jasmine.any(QuestionGroup));
+    });
+
+    it("should return the correct number of questions", function() {
+      expect(limitedGroup.questions.length).toEqual(1);
+    });
+
+    it("should return a group with the same name", function() {
+      expect(limitedGroup.name).toEqual("my amazing group");
+    });
+
+    it("should limit starting at 0, ending at the number given", function() {
+      expect(limitedGroup.questions).toEqual(["What is the time"]);
+    });
+
+    it("should return a zero questions when the count is less than 1", function() {
+      var negativeLimitedGroup = group.limit(-1);
+      expect(negativeLimitedGroup.questions.length).toEqual(0);
+    });
+  })
 });
