@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "jasmine",
-    "prettier": "prettier --write public/**/*"
+    "prettier": "prettier --write **/src/*.js **/spec/*.js"
   },
   "repository": {
     "type": "git",
