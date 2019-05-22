@@ -9372,7 +9372,7 @@ var Question = /** @class */ (function (_super) {
     };
     Object.defineProperty(Question.prototype, "correctAnswer", {
         /**
-         * The correct answer on the question. Set this value if you are doing a quiz.
+         * The correct answer on the question. Set this value if you are doing aquiz.
          * @see SurveyModel.correctAnswers
          * @see SurveyModel.inCorrectAnswers
          */

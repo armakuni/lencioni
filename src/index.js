@@ -1,13 +1,13 @@
 var Survey = require("../assets/external/surveyjs/1.0.85/survey.jquery");
-var QuestionGroup = require("./questiongroup");
-var GenerateSeed = require("../src/generateseed")
+var QuestionGroup = require("./survey/QuestionGroup");
+var GenerateSeed = require("./GenerateSeed");
 import "../assets/external/surveyjs/1.0.85/survey.css";
 
 const QUESTIONS_PER_GROUP = 2;
 
 var seed = GenerateSeed();
 
-function buildQuestions(group, groupName) {
+function buildSurveyQuestions(group, groupName) {
   var elements = [];
   jQuery.each(group, function(index, element) {
     elements.push({
@@ -61,8 +61,13 @@ var data = {
 var elements = [];
 jQuery.each(data, function(index, group) {
   var groupQuestions = new QuestionGroup(index, group.questions);
-  groupQuestions = groupQuestions.shuffleQuestions(seed).limit(QUESTIONS_PER_GROUP);
-  elements = jQuery.merge(elements, buildQuestions(groupQuestions.questions, groupQuestions.name));
+  groupQuestions = groupQuestions
+    .shuffleQuestions(seed)
+    .limit(QUESTIONS_PER_GROUP);
+  elements = jQuery.merge(
+    elements,
+    buildSurveyQuestions(groupQuestions.questions, groupQuestions.name)
+  );
 });
 
 var shuffledElements = elements;

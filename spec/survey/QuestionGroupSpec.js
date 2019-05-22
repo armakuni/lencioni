@@ -1,5 +1,5 @@
 describe("Question Group", function() {
-  var QuestionGroup = require('../../src/questiongroup');
+  var QuestionGroup = require('../../src/survey/QuestionGroup');
 
   var group;
 
