@@ -17,11 +17,11 @@ describe("Question Group", function() {
     expect(group.questions).toEqual(["What is the time"]);
   });
 
-  describe("Shuffle", function() {
+  describe("Shuffle Questions", function() {
     var shuffledGroup
     beforeEach(function() {
       group = new QuestionGroup("my amazing group",["What is the time", "What is for dinner", "Where is my car"]);
-      shuffledGroup = group.shuffle("myrandomseed");
+      shuffledGroup = group.shuffleQuestions("myrandomseed");
     });
 
     it("should be able to give me a shuffled set of questions", function() {
