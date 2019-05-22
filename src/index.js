@@ -47,7 +47,7 @@ var data = {
   accountability: {
     questions: [
       "Team members point out one another’s unproductive behaviors.",
-      "Team members are quick to confront peers about problems in their respective areas ofresponsibility."
+      "Team members are quick to confront peers about problems in their respective areas of responsibility."
     ]
   },
   results: {
