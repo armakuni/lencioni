@@ -1,7 +1,7 @@
 The MIT License (MIT)
 =====================
 
-Copyright © 2019 Arkamuni Ltd
+Copyright © 2019 Armakuni Ltd
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
