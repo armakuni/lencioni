@@ -13,12 +13,23 @@ toSurveyJsElements = function () {
         return [];
     }
 
-    return [{
-        type: 'rating',
-        isRequired: true,
-        rateMin: 1,
-        rateMax: 5,
-        minRateDescription: '(Never)',
-        maxRateDescription: '(Always)'
-    }]
+    var surveyJsElements = [];
+
+    questionGroups.forEach(function (questionGroup) {
+        questionGroup.questions.forEach(function (question, index) {
+            surveyJsElements.push({
+                name: questionGroup.name + "_" + index,
+                type: 'rating',
+                title: question,
+                isRequired: true,
+                rateMin: 1,
+                rateMax: 5,
+                minRateDescription: '(Never)',
+                maxRateDescription: '(Always)'
+            });
+        });
+    })
+
+
+    return surveyJsElements;
 };

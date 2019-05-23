@@ -1,26 +1,28 @@
 describe("Question Group", function() {
-  var QuestionGroup = require('../../src/survey/QuestionGroup');
+  var QuestionGroup = require("../../src/survey/QuestionGroup");
 
   var group;
 
-
   it("should be able to give me its name", function() {
-    group = new QuestionGroup("my amazing group",[]);
+    group = new QuestionGroup("my amazing group", []);
 
     expect(group.name).toEqual("my amazing group");
   });
 
-
   it("should be able to give me its questions", function() {
-    group = new QuestionGroup("my amazing group",["What is the time"]);
+    group = new QuestionGroup("my amazing group", ["What is the time"]);
 
     expect(group.questions).toEqual(["What is the time"]);
   });
 
   describe("Shuffle Questions", function() {
-    var shuffledGroup
+    var shuffledGroup;
     beforeEach(function() {
-      group = new QuestionGroup("my amazing group",["What is the time", "What is for dinner", "Where is my car"]);
+      group = new QuestionGroup("my amazing group", [
+        "What is the time",
+        "What is for dinner",
+        "Where is my car"
+      ]);
       shuffledGroup = group.shuffleQuestions("myrandomseed");
     });
 
@@ -39,12 +41,16 @@ describe("Question Group", function() {
     it("should return a different question order", function() {
       expect(shuffledGroup.questions).not.toEqual(group.questions);
     });
-  })
+  });
 
   describe("Limit", function() {
-    var limitedGroup
+    var limitedGroup;
     beforeEach(function() {
-      group = new QuestionGroup("my amazing group",["What is the time", "What is for dinner", "Where is my car"]);
+      group = new QuestionGroup("my amazing group", [
+        "What is the time",
+        "What is for dinner",
+        "Where is my car"
+      ]);
       limitedGroup = group.limit(1);
     });
 
@@ -68,5 +74,5 @@ describe("Question Group", function() {
       var negativeLimitedGroup = group.limit(-1);
       expect(negativeLimitedGroup.questions.length).toEqual(0);
     });
-  })
+  });
 });
