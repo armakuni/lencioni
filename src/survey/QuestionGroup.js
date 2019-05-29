@@ -7,12 +7,22 @@ function QuestionGroup(name, questions) {
   this.limit = limit;
 }
 
-shuffleQuestions = function(seed) {
+QuestionGroup.arrayFromObject = function(data) {
+  questions = [];
+
+  data.questions.forEach(function(question) {
+    questions.push(question);
+  });
+
+  return questions
+}
+
+var shuffleQuestions = function(seed) {
   shuffledQuestions = shuffleArray(seed, this.questions);
   return new QuestionGroup(this.name, shuffledQuestions);
 };
 
-shuffleArray = function(seed, original) {
+var shuffleArray = function(seed, original) {
   var copy = Array.from(original);
 
   var randomGenerator = new seedrandom(seed);
@@ -23,7 +33,7 @@ shuffleArray = function(seed, original) {
   return copy;
 };
 
-limit = function(count) {
+var limit = function(count) {
   if (count < 1) {
     return new QuestionGroup(this.name, []);
   }

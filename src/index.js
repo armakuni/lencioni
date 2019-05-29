@@ -1,29 +1,9 @@
 var Survey = require("../assets/external/surveyjs/1.0.85/survey.jquery");
 var QuestionGroup = require("./survey/QuestionGroup");
-var GenerateSeed = require("./GenerateSeed");
+var LencioniSurvey = require("./survey/Survey");
 import "../assets/external/surveyjs/1.0.85/survey.css";
 
 const QUESTIONS_PER_GROUP = 2;
-
-var seed = GenerateSeed();
-
-function buildSurveyQuestions(group, groupName) {
-  var elements = [];
-  jQuery.each(group, function(index, element) {
-    elements.push({
-      type: "rating",
-      name: groupName + "_" + index,
-      title: element,
-      isRequired: true,
-      rateMin: 1,
-      rateMax: 5,
-      minRateDescription: "(Never)",
-      maxRateDescription: "(Always)"
-    });
-  });
-
-  return elements;
-}
 
 var data = {
   trust: {
@@ -42,7 +22,7 @@ var data = {
     questions: [
       "Team members are passionate and unguarded in their discussion of issues.",
       "Team meetings are interesting and compelling (not boring).",
-      "During team meetings, the most important—and difficult—issues are discussed.",
+      "During team meetings, the most important-and difficult-issues are discussed.",
       "Team members voice their opinions even at the risk of causing disagreement.",
       "During discussions, team members challenge one another about how they arrived at their conclusions and opinions.",
       "Team members solicit one another's opinions during meetings.",
@@ -82,24 +62,23 @@ var data = {
       "The team consistently achieves its objectives.",
       "Team members value collective success more than individual achievement.",
       "Team members place little importance on titles and status. (A high score on this statement indicates that titles and status are NOT important to team members.)Ÿ"
-
     ]
   }
 };
 
-var elements = [];
-jQuery.each(data, function(index, group) {
-  var groupQuestions = new QuestionGroup(index, group.questions);
-  groupQuestions = groupQuestions
-    .shuffleQuestions(seed)
+var questionGroups = [];
+jQuery.each(data, function(groupName, groupObject) {
+  var group = new QuestionGroup(
+    groupName,
+    QuestionGroup.arrayFromObject(groupObject)
+  )
+    .shuffleQuestions()
     .limit(QUESTIONS_PER_GROUP);
-  elements = jQuery.merge(
-    elements,
-    buildSurveyQuestions(groupQuestions.questions, groupQuestions.name)
-  );
+
+  questionGroups.push(group);
 });
 
-var shuffledElements = elements;
+var lencioniSurvey = new LencioniSurvey(questionGroups);
 
 var json = {
   completedHtml:
@@ -119,7 +98,7 @@ var json = {
   pages: [
     {
       name: "page1",
-      elements: shuffledElements
+      elements: lencioniSurvey.toSurveyJsElements()
     }
   ],
   showQuestionNumbers: "off"

@@ -75,4 +75,21 @@ describe("Question Group", function() {
       expect(negativeLimitedGroup.questions.length).toEqual(0);
     });
   });
+
+  describe("Question Builder", function() {
+    it("should be able to give me an array of questions from a question data set", function() {
+      var data = {
+        trust: {
+          questions: [
+            "Team members admit their mistakes.",
+            "Team members acknowledge their weaknesses to one another."
+          ]
+        }
+      };
+      expect(QuestionGroup.arrayFromObject(data.trust)).toEqual([
+        "Team members admit their mistakes.",
+        "Team members acknowledge their weaknesses to one another."
+      ]);
+    });
+  });
 });
