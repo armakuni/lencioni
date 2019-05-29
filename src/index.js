@@ -1,9 +1,10 @@
 var Survey = require("../assets/external/surveyjs/1.0.85/survey.jquery");
 var QuestionGroup = require("./survey/QuestionGroup");
 var LencioniSurvey = require("./survey/Survey");
+var GenerateSeed = require("./GenerateSeed");
 import "../assets/external/surveyjs/1.0.85/survey.css";
 
-const QUESTIONS_PER_GROUP = 2;
+const QUESTIONS_PER_GROUP = 3;
 
 var data = {
   trust: {
@@ -72,7 +73,7 @@ jQuery.each(data, function(groupName, groupObject) {
     groupName,
     QuestionGroup.arrayFromObject(groupObject)
   )
-    .shuffleQuestions()
+    .shuffleQuestions(GenerateSeed())
     .limit(QUESTIONS_PER_GROUP);
 
   questionGroups.push(group);

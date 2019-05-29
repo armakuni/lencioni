@@ -5,9 +5,10 @@ function Survey(groups) {
 
     this.toSurveyJsElements = toSurveyJsElements;
     this.toSurveyJsJSON = toSurveyJsJSON;
+    this.shuffleQuestions = shuffleQuestions;
 
     this.props = {
-        'completedHTML' : "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
+        completedHTML : "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
         elements: []
     }
 }
@@ -47,9 +48,23 @@ function toSurveyJsJSON() {
     surveyJsObject.pages = [
         {
             name: "page1",
-            elements: this.toSurveyJsElements()
+            elements: this.shuffleQuestions(this.toSurveyJsElements())
           }
     ]
 
     return JSON.stringify(surveyJsObject);
 }
+
+function shuffleQuestions(questions) {
+    return shuffleArray(questions)
+}
+
+var shuffleArray = function(original) {
+    var copy = Array.from(original);
+
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  };

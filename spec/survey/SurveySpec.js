@@ -91,6 +91,39 @@ describe("Survey", function() {
       );
     });
   });
+
+  describe("Shuffle Questions", function() {
+    var questions;
+    var survey;
+    beforeEach(function() {
+      questions = [
+        "Are you happy with the team you're in?",
+        "Are you really happy?",
+        "Are you sure?",
+        "Is that definitely true?"
+      ];
+      survey = new Survey([]);
+    });
+
+    it("should contain the same number of questions", function() {
+      expect(survey.shuffleQuestions(questions).length).toEqual(4);
+    });
+
+    it("should return a list of shuffled questions", function() {
+      expect(survey.shuffleQuestions(questions)).not.toEqual([
+        "Are you happy with the team you're in?",
+        "Are you really happy?",
+        "Are you sure?",
+        "Is that definitely true?"
+      ]);
+    });
+
+    it("should return the same questions again not in the same order", function() {
+      expect(survey.shuffleQuestions(questions)).not.toEqual(
+        survey.shuffleQuestions(questions)
+      );
+    });
+  });
 });
 
 function mockGroups(questionGroupSpec) {
