@@ -74,6 +74,23 @@ describe("Survey", function() {
       expect(survey.toSurveyJsElements()[1].title).toEqual("question 2");
     });
   });
+
+  describe("toSurveyJsJSON", function() {
+    it("should be able to give me an skeleton json when no data", function() {
+      survey = new Survey([]);
+      expect(survey.toSurveyJsJSON()).toEqual(
+        '{"completedHTML":"<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>","pages":[{"name":"page1","elements":[]}]}'
+      );
+    });
+
+    it("should have a configurable HTML property", function() {
+      survey = new Survey([]);
+      survey.props.completedHTML = "<test>";
+      expect(survey.toSurveyJsJSON()).toEqual(
+        '{"completedHTML":"<test>","pages":[{"name":"page1","elements":[]}]}'
+      );
+    });
+  });
 });
 
 function mockGroups(questionGroupSpec) {

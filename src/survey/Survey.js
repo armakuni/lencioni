@@ -3,7 +3,13 @@ var questionGroups;
 function Survey(groups) {
     questionGroups = groups;
 
-    this.toSurveyJsElements = toSurveyJsElements
+    this.toSurveyJsElements = toSurveyJsElements;
+    this.toSurveyJsJSON = toSurveyJsJSON;
+
+    this.props = {
+        'completedHTML' : "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
+        elements: []
+    }
 }
 
 module.exports = Survey;
@@ -33,3 +39,17 @@ toSurveyJsElements = function () {
 
     return surveyJsElements;
 };
+
+function toSurveyJsJSON() {
+    var surveyJsObject = {};
+
+    surveyJsObject.completedHTML = this.props.completedHTML;
+    surveyJsObject.pages = [
+        {
+            name: "page1",
+            elements: this.toSurveyJsElements()
+          }
+    ]
+
+    return JSON.stringify(surveyJsObject);
+}
