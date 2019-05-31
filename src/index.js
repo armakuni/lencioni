@@ -5,6 +5,8 @@ var GenerateSeed = require("./GenerateSeed");
 import "../assets/external/surveyjs/1.0.85/survey.css";
 import "../assets/external/pyramid.css";
 
+var pyramidElement = $(".pyramid").hide();
+
 const QUESTIONS_PER_GROUP = 3;
 
 var data = {
@@ -86,19 +88,12 @@ window.survey = new Survey.Model(lencioniSurvey.toSurveyJsJSON());
 survey.onComplete.add(function(results) {
   var scores = lencioniSurvey.calculateResults(results);
 
-  for (var key in scores) {
-    var score = scores[key];
-    $(".pyramid").removeAttr('style');
-    var ele = $(".pyramid").find("." + key)[0];
-
-    if (score >= 3.75) {
-      $(ele).addClass("green");
-    } else if (score >= 3.25) {
-      $(ele).addClass("amber");
-    } else {
-      $(ele).addClass("red");
-    }
+  for (var dysfunction in scores) {
+    var rating = lencioniSurvey.resultToRating(scores[dysfunction]);
+    $(".pyramid ." + dysfunction).addClass(rating);
   }
+
+  pyramidElement.show();
 });
 
 $("#surveyElement").Survey({ model: survey });

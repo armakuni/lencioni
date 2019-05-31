@@ -66,3 +66,7 @@
 .pyramid-historic div div:nth-child(5) {
   top: 440px;
 }
+
+.pyramid .results {
+  line-height: 135px;
+}

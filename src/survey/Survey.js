@@ -7,6 +7,7 @@ function Survey(groups) {
     this.toSurveyJsJSON = toSurveyJsJSON;
     this.shuffleQuestions = shuffleQuestions;
     this.calculateResults = calculateResults;
+    this.resultToRating = resultToRating;
 
     this.props = {
         completedHTML : "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -84,6 +85,16 @@ function calculateResults(results) {
       }
 
     return averageCount;
+}
+
+function resultToRating(result) {
+    if (result >= 3.75) {
+        return "green";
+    }
+    else if (result >= 3.25) {
+        return "amber";
+    }
+    return "red";
 }
 
 var shuffleArray = function(original) {

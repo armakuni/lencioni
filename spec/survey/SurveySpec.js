@@ -148,6 +148,42 @@ describe("Survey", function() {
       expect(survey.calculateResults(mockResults())).toEqual(expectedResult);
     });
   });
+
+  describe("Result To Rating", function() {
+    var results;
+    var survey;
+    beforeEach(function() {
+      groups = mockGroups({
+        myamazinggroup: 2,
+        anotheramazinggroup: 1
+      });
+      survey = new Survey(groups);
+    });
+
+    it("should return red no results are provided", function() {
+      expect(survey.resultToRating()).toEqual("red");
+    });
+
+    it("should return red if result is less than 3.25", function() {
+      expect(survey.resultToRating(3.25)).not.toEqual("red");
+      expect(survey.resultToRating(3.24)).toEqual("red");
+      expect(survey.resultToRating(1)).toEqual("red");
+    });
+
+    it("should return amber if result is greater than or equal to 3.25 but less than 3.75", function() {
+      expect(survey.resultToRating(3.24)).not.toEqual("amber");
+      expect(survey.resultToRating(3.25)).toEqual("amber");
+      expect(survey.resultToRating(3.26)).toEqual("amber");
+      expect(survey.resultToRating(3.75)).not.toEqual("amber");
+      expect(survey.resultToRating(3.76)).not.toEqual("amber");
+    });
+
+    it("should return green if result is greater than or equal to 3.75", function() {
+      expect(survey.resultToRating(3.74)).not.toEqual("green");
+      expect(survey.resultToRating(3.75)).toEqual("green");
+      expect(survey.resultToRating(3.76)).toEqual("green");
+    });
+  });
 });
 
 function mockGroups(questionGroupSpec) {
