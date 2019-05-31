@@ -14,7 +14,7 @@ var data = {
       "Team members ask for help without hesitation.",
       "Team members ask one another for input regarding their areas of responsibility.",
       "Team members acknowledge and tap into one another's skills and expertise.",
-      "Team members willingly apologize to one another.",
+      "Team members willingly apologise to one another.",
       "Team members are unguarded and genuine with one another.",
       "Team members can comfortably discuss their personal lives with one another."
     ]
@@ -44,7 +44,7 @@ var data = {
   },
   accountability: {
     questions: [
-      "Team members point out one another's unproductive behaviors.",
+      "Team members point out one another's unproductive behaviours.",
       "Team members are quick to confront peers about problems in their respective areas of responsibility.",
       "Team members question one another about their current approaches and methods.",
       "The team ensures that poor performers feel pressure and the expectation to improve.",
