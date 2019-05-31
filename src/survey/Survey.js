@@ -6,6 +6,7 @@ function Survey(groups) {
     this.toSurveyJsElements = toSurveyJsElements;
     this.toSurveyJsJSON = toSurveyJsJSON;
     this.shuffleQuestions = shuffleQuestions;
+    this.calculateResults = calculateResults;
 
     this.props = {
         completedHTML : "<h3>Thank you for your feedback.</h3> <h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -59,12 +60,38 @@ function shuffleQuestions(questions) {
     return shuffleArray(questions)
 }
 
+function calculateResults(results) {
+    if (results == undefined || results.length == 0) {
+        return [];
+    }
+
+    var resultCount = [];
+
+    Object.entries(results.data).forEach(result => {
+        let key = result[0].replace(/_[0-9]/g, "");
+        let value = result[1];
+
+        if (resultCount[key] == undefined) {
+          resultCount[key] = 0;
+        }
+        resultCount[key] = resultCount[key] + value;
+      });
+
+      var averageCount = [];
+
+      for (var key in resultCount) {
+        averageCount[key] = resultCount[key] / 3;
+      }
+
+    return averageCount;
+}
+
 var shuffleArray = function(original) {
     var copy = Array.from(original);
 
     for (let i = copy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
     }
     return copy;
-  };
+};

@@ -124,6 +124,30 @@ describe("Survey", function() {
       );
     });
   });
+  describe("Calculate results", function() {
+    var results;
+    var survey;
+    beforeEach(function() {
+      groups = mockGroups({
+        myamazinggroup: 2,
+        anotheramazinggroup: 1
+      });
+      survey = new Survey(groups);
+    });
+
+    it("should return an an empty array if no results are provided", function() {
+      expect(survey.calculateResults()).toEqual([]);
+    });
+
+    it("should return an array of results", function() {
+      var expectedResult = [];
+      expectedResult["accountability"] = 2;
+      expectedResult["commitment"] = 2;
+      expectedResult["results"] = 3;
+
+      expect(survey.calculateResults(mockResults())).toEqual(expectedResult);
+    });
+  });
 });
 
 function mockGroups(questionGroupSpec) {
@@ -146,4 +170,23 @@ function mockQuestions(count) {
     questions.push("question " + index);
   }
   return questions;
+}
+
+function mockResults() {
+  var data = [];
+  data["accountability_0"] = 3;
+  data["accountability_1"] = 1;
+  data["accountability_2"] = 2;
+  data["commitment_0"] = 2;
+  data["commitment_1"] = 1;
+  data["commitment_2"] = 3;
+  data["results_0"] = 5;
+  data["results_1"] = 1;
+  data["results_2"] = 3;
+
+  var result = {
+    data: data
+  };
+
+  return result;
 }

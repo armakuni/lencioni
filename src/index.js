@@ -79,13 +79,15 @@ jQuery.each(data, function(groupName, groupObject) {
   questionGroups.push(group);
 });
 
-window.survey = new Survey.Model(
-  new LencioniSurvey(questionGroups).toSurveyJsJSON()
-);
+var lencioniSurvey = new LencioniSurvey(questionGroups);
+window.survey = new Survey.Model(lencioniSurvey.toSurveyJsJSON());
 
-survey.onComplete.add(function(result) {
-  document.querySelector("#surveyResult").innerHTML =
-    "result: " + JSON.stringify(result.data);
+survey.onComplete.add(function(results) {
+  var results = lencioniSurvey.calculateResults(results);
+
+  console.log(results);
+
+  document.querySelector("#surveyResult").innerHTML = "results in console";
 });
 
 $("#surveyElement").Survey({ model: survey });
