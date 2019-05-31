@@ -3,6 +3,7 @@ var QuestionGroup = require("./survey/QuestionGroup");
 var LencioniSurvey = require("./survey/Survey");
 var GenerateSeed = require("./GenerateSeed");
 import "../assets/external/surveyjs/1.0.85/survey.css";
+import "../assets/external/pyramid.css";
 
 const QUESTIONS_PER_GROUP = 3;
 
@@ -83,11 +84,21 @@ var lencioniSurvey = new LencioniSurvey(questionGroups);
 window.survey = new Survey.Model(lencioniSurvey.toSurveyJsJSON());
 
 survey.onComplete.add(function(results) {
-  var results = lencioniSurvey.calculateResults(results);
+  var scores = lencioniSurvey.calculateResults(results);
 
-  console.log(results);
+  for (var key in scores) {
+    var score = scores[key];
+    $(".pyramid").removeAttr('style');
+    var ele = $(".pyramid").find("." + key)[0];
 
-  document.querySelector("#surveyResult").innerHTML = "results in console";
+    if (score >= 3.75) {
+      $(ele).addClass("green");
+    } else if (score >= 3.25) {
+      $(ele).addClass("amber");
+    } else {
+      $(ele).addClass("red");
+    }
+  }
 });
 
 $("#surveyElement").Survey({ model: survey });
